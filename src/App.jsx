@@ -494,6 +494,32 @@ export default function CarWahanApp() {
   const [offerForm, setOfferForm] = useState({ from:"", to:"", date:"", time:"", seats:"3", price:"" });
   const [driverRatings, setDriverRatings] = useState({ 1:4.8, 2:4.9, 3:4.6 });
   const reset = () => { setRole(null); setSearchDone(false); setSelectedRide(null); setBookingDone(false); setShowPayment(false); setShowRating(false); setOfferStep("form"); };
+    // Booking data ko Supabase me save karne wala function
+  const handleCarBooking = async (bookingDetails) => {
+    const { data, error } = await supabase
+      .from('bookings')
+      .insert([
+        {
+          user_name: bookingDetails.userName || '',
+          user_phone: bookingDetails.userPhone || '',
+          car_model: selectedRide?.name || bookingDetails.carModel || '',
+          car_number: selectedRide?.number || bookingDetails.carNumber || '',
+          customer_aadhar: bookingDetails.customerAadhar || '',
+          customer_dl: bookingDetails.customerDL || '',
+          driver_aadhar: bookingDetails.driverAadhar || '',
+          driver_dl: bookingDetails.driverDL || '',
+          status: 'Pending'
+        }
+      ]);
+
+    if (error) {
+      alert("Booking me pareshani aayi: " + error.message);
+    } else {
+      setBookingDone(true);
+      alert("Badhai ho! CarWahan par aapki gadi kamyabi se book ho gayi hai.");
+    }
+  };
+  
   // ── LANDING ────────────────────────────────────────────────────────────────
   if (!role) return (
     <div style={{ minHeight:"100vh",background:C.accent,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24,fontFamily:"'Segoe UI',sans-serif" }}>
