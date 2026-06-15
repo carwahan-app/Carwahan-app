@@ -633,10 +633,52 @@ export default function CarWahanApp() {
           <div style={{ fontSize:26,fontWeight:900,color:C.primary }}>₹{selectedRide.price}</div>
           <div style={{ fontSize:11,color:C.muted }}>{t.perSeat} · {COMMISSION}% fee</div>
         </div>
-        <button onClick={()=>setShowPayment(true)} style={{ padding:"13px 28px",background:C.primary,border:"none",borderRadius:12,color:"#fff",fontWeight:700,fontSize:16,cursor:"pointer" }}>{t.bookNow}</button>
+                {/* Verification Inputs */}
+        <div style={{ padding: '10px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <input 
+            type="text" 
+            placeholder="Customer Aadhar Number" 
+            style={{ width: '100%', padding: '8px', borderRadius: '6px', border: '1px solid #333', backgroundColor: '#111', color: '#fff', fontSize: '14px' }}
+            onChange={(e) => window.bookingFormDetails = { ...window.bookingFormDetails, customerAadhar: e.target.value }}
+          />
+          <input 
+            type="text" 
+            placeholder="Customer DL Number" 
+            style={{ width: '100%', padding: '8px', borderRadius: '6px', border: '1px solid #333', backgroundColor: '#111', color: '#fff', fontSize: '14px' }}
+            onChange={(e) => window.bookingFormDetails = { ...window.bookingFormDetails, customerDL: e.target.value }}
+          />
+          <input 
+            type="text" 
+            placeholder="Driver Aadhar Number (Optional)" 
+            style={{ width: '100%', padding: '8px', borderRadius: '6px', border: '1px solid #333', backgroundColor: '#111', color: '#fff', fontSize: '14px' }}
+            onChange={(e) => window.bookingFormDetails = { ...window.bookingFormDetails, driverAadhar: e.target.value }}
+          />
+          <input 
+            type="text" 
+            placeholder="Driver DL Number (Optional)" 
+            style={{ width: '100%', padding: '8px', borderRadius: '6px', border: '1px solid #333', backgroundColor: '#111', color: '#fff', fontSize: '14px' }}
+            onChange={(e) => window.bookingFormDetails = { ...window.bookingFormDetails, driverDL: e.target.value }}
+          />
+        </div>
+        
+                <button 
+          style={{ width: '100%', padding: '12px', backgroundColor: '#fff', color: '#000', fontWeight: 'bold', border: 'none', borderRadius: '8px', marginTop: '10px', cursor: 'pointer' }}
+          onClick={() => {
+            handleCarBooking({
+              userName: "Customer", 
+              userPhone: "Mobile",
+              customerAadhar: window.bookingFormDetails?.customerAadhar,
+              customerDL: window.bookingFormDetails?.customerDL,
+              driverAadhar: window.bookingFormDetails?.driverAadhar,
+              driverDL: window.bookingFormDetails?.driverDL
+            });
+            setShowPayment(true);
+          }}
+        >
+          Book Now
+        </button>
       </div>
-      {showPayment && <PaymentModal t={t} ride={selectedRide} onSuccess={()=>{setShowPayment(false);setBookingDone(true);setToast(t.passengerNotified);}} onClose={()=>setShowPayment(false)} />}
-    </div>
+      
   );
   // ── PASSENGER HOME ─────────────────────────────────────────────────────────
   if (role==="passenger") return (
