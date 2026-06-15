@@ -659,8 +659,7 @@ export default function CarWahanApp() {
             style={{ width: '100%', padding: '8px', borderRadius: '6px', border: '1px solid #333', backgroundColor: '#111', color: '#fff', fontSize: '14px' }}
             onChange={(e) => window.bookingFormDetails = { ...window.bookingFormDetails, driverDL: e.target.value }}
           />
-        </div>
-        
+        </div>   
                 <button 
           style={{ width: '100%', padding: '12px', backgroundColor: '#fff', color: '#000', fontWeight: 'bold', border: 'none', borderRadius: '8px', marginTop: '10px', cursor: 'pointer' }}
           onClick={() => {
@@ -677,9 +676,9 @@ export default function CarWahanApp() {
         >
           Book Now
         </button>
-      </div>
-      
-  );
+             </div>
+    );
+  }
   // ── PASSENGER HOME ─────────────────────────────────────────────────────────
   if (role==="passenger") return (
     <div style={{ minHeight:"100vh",background:C.bg,fontFamily:"'Segoe UI',sans-serif" }}>
