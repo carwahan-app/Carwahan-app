@@ -1012,5 +1012,3 @@ export default function CarWahanApp() {
       </div>
     );
   }
-  return null;
-} 
