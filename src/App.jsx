@@ -680,7 +680,6 @@ export default function CarWahanApp() {
     </div>
   );
 }
-
   // ── PASSENGER HOME ─────────────────────────────────────────────────────────
   if (role==="passenger") return (
     <div style={{ minHeight:"100vh",background:C.bg,fontFamily:"'Segoe UI',sans-serif" }}>
